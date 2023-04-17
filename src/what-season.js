@@ -25,7 +25,7 @@ function getSeason(date) {
   }
 }
 
-console.log(getSeason(new Date(260, 8, 22, 14, 39, 46, 366)));
+// console.log(getSeason(1));
 
 module.exports = {
   getSeason,

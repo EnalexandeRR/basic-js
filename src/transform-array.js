@@ -17,7 +17,9 @@ function transform(arr) {
   const modedArr = [];
 
   try {
-    if (Array.isArray(arr)) {
+    if (!Array.isArray(arr)) {
+      undefined.isArray();
+    } else {
       for (let i = 0; i < arr.length; i++) {
         if (arr[i] === "--discard-prev") {
           if (modedArr.at(-1)) {
@@ -38,10 +40,11 @@ function transform(arr) {
       return modedArr;
     }
   } catch (error) {
+    // console.log(error);
     throw new Error("'arr' parameter must be an instance of the Array!");
   }
 }
-console.log(transform({ foo: "bar" }));
+// console.log(transform({ foo: "bar" }));
 module.exports = {
   transform,
 };
