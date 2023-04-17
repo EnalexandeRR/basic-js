@@ -16,25 +16,29 @@ const { NotImplementedError } = require("../extensions/index.js");
 function transform(arr) {
   const modedArr = [];
 
-  if (Array.isArray(arr)) {
-    for (let i = 0; i < arr.length; i++) {
-      if (arr[i] === "--discard-prev") {
-        if (modedArr.at(-1)) {
-          modedArr.pop();
-        }
-      } else if (arr[i] === "--discard-next") {
-        i++;
-      } else if (arr[i] === "--double-prev") {
-        modedArr.push(modedArr.at(-1));
-      } else if (arr[i] === "--double-next") {
-        if (arr[i + 1]) {
-          modedArr.push(arr[i + 1]);
-        }
-      } else modedArr.push(arr[i]);
+  try {
+    if (Array.isArray(arr)) {
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i] === "--discard-prev") {
+          if (modedArr.at(-1)) {
+            modedArr.pop();
+          }
+        } else if (arr[i] === "--discard-next") {
+          i++;
+        } else if (arr[i] === "--double-prev") {
+          if (modedArr.at(-1)) {
+            modedArr.push(modedArr.at(-1));
+          }
+        } else if (arr[i] === "--double-next") {
+          if (arr[i + 1]) {
+            modedArr.push(arr[i + 1]);
+          }
+        } else modedArr.push(arr[i]);
+      }
+      return modedArr;
     }
-    return modedArr;
-  } else {
-    throw Error("'arr' parameter must be an instance of the Array!");
+  } catch (error) {
+    throw new Error("'arr' parameter must be an instance of the Array!");
   }
 }
 console.log(transform({ foo: "bar" }));

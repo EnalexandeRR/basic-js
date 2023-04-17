@@ -20,14 +20,12 @@ function sortByHeight(arr) {
   arrWithoutNegative = arrWithoutNegative.sort((a, b) => {
     return a - b;
   });
-  console.log(arrWithoutNegative);
   for (let i = 0; i < arr.length; i++) {
     if (arr[i] !== -1) {
       arr[i] = arrWithoutNegative[wnIndex];
       wnIndex++;
     }
   }
-  console.log(arr);
   return arr;
 }
 sortByHeight([-1, 150, 190, 170, -1, -1, 160, 180]);
