@@ -14,16 +14,18 @@ const { NotImplementedError } = require("../extensions/index.js");
 function getSeason(date) {
   if (date == null) return "Unable to determine the time of year!";
 
-  if (date.length < 5) throw new Error("Invalid date!");
-  if (typeof date !== "string") throw new Error("Invalid date!");
-
-  if (date.getMonth() < 2 || date.getMonth() === 11) return "winter";
-  else if (date.getMonth() < 5) return "spring";
-  else if (date.getMonth() < 8) return "summer";
-  else return "fall";
+  try {
+    date.getTime();
+    if (date.getMonth() < 2 || date.getMonth() === 11) return "winter";
+    else if (date.getMonth() < 5) return "spring";
+    else if (date.getMonth() < 8) return "summer";
+    else return "fall";
+  } catch (error) {
+    throw new Error("Invalid date!");
+  }
 }
 
-console.log(getSeason(20192701));
+console.log(getSeason(new Date(260, 8, 22, 14, 39, 46, 366)));
 
 module.exports = {
   getSeason,
